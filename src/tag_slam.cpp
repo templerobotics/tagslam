@@ -388,7 +388,7 @@ namespace tagslam {
   static void process_images(const std::vector<T> &msgvec,
                              std::vector<cv::Mat> *images) {
     images->clear();
-    for (const auto i: irange(0ul, msgvec.size())) {
+    for (const auto i: irange(0u, msgvec.size())) {
       const auto &img = msgvec[i];
       cv::Mat im =
         cv_bridge::toCvCopy(img,sensor_msgs::image_encodings::BGR8)->image;
@@ -650,7 +650,7 @@ namespace tagslam {
   }
 
   void TagSlam::publishBodyOdom(const ros::Time &t) {
-    for (const auto body_idx: irange(0ul, nonstaticBodies_.size())) {
+    for (const auto body_idx: irange(0u, nonstaticBodies_.size())) {
       const auto body = nonstaticBodies_[body_idx];
       PoseWithNoise pwn;
       if (body->publishCovariance()) {
@@ -832,7 +832,7 @@ namespace tagslam {
   
   void TagSlam::setupOdom(const std::vector<OdometryConstPtr> &odomMsgs) {
     std::set<BodyConstPtr> bodySet;
-    for (const auto odomIdx: irange(0ul, odomMsgs.size())) {
+    for (const auto odomIdx: irange(0u, odomMsgs.size())) {
       const auto &frameId = odomMsgs[odomIdx]->child_frame_id;
       BodyConstPtr bpt;
       for (const auto &body: bodies_) {
@@ -860,7 +860,7 @@ namespace tagslam {
       setupOdom(odomMsgs);
     }
     // from odom child frame id, deduce bodies
-    for (const auto odomIdx: irange(0ul, odomMsgs.size())) {
+    for (const auto odomIdx: irange(0u, odomMsgs.size())) {
       const auto &msg = odomMsgs[odomIdx];
       odomProcessors_[odomIdx].process(t, graph_.get(), msg, factors);
       //graph_.test();
@@ -1072,7 +1072,7 @@ namespace tagslam {
     typedef std::multimap<double, VertexDesc> MMap;
     MMap sortedFactors;
 
-    for (const auto i: irange(0ul, cameras_.size())) {
+    for (const auto i: irange(0u, cameras_.size())) {
       const auto &cam = cameras_[i];
       const auto tags = findTags(tagMsgs[i]->apriltags);
       if (!tags.empty()) {
@@ -1133,7 +1133,7 @@ namespace tagslam {
     // Sometimes there are tags with duplicate ids in the data set.
     // In this case, remap the tag ids of the detected tags dependent
     // on time stamp, to something else so they become unique.
-    for (const auto i: irange(0ul, orig.size())) {
+    for (const auto i: irange(0u, orig.size())) {
       const string &camName = cameras_[i]->getName();
       const auto it = camSquash_.find(camName);
       const std::set<int> *sqc = (it != camSquash_.end()) ?
@@ -1229,11 +1229,11 @@ namespace tagslam {
                                 const std::set<int> &tags) {
     const string cam = xml::parse<std::string>(sq, "camera", "");
     if (cam.empty()) { // squash all from given camera
-      for (const auto i: irange(0ul, cameras_.size())) {
+      for (const auto i: irange(0u, cameras_.size())) {
         insert_into(&squash_[i], t, tags);
       }
     } else {
-      for (const auto i: irange(0ul, cameras_.size())) {
+      for (const auto i: irange(0u, cameras_.size())) {
         if (cameras_[i]->getName() == cam) {
           insert_into(&squash_[i], t, tags);
         }
@@ -1242,7 +1242,7 @@ namespace tagslam {
   }
 
   void TagSlam::readSquash(XmlRpc::XmlRpcValue config) {
-    for (const auto i: irange(0ul, cameras_.size())) {
+    for (const auto i: irange(0u, cameras_.size())) {
       (void )i;
       squash_.push_back(std::map<ros::Time, std::set<int>>());
     }

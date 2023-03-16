@@ -84,7 +84,7 @@ namespace tagslam {
       dc[1]     = D.size() > 1 ? D[1] : 0;
       double p1 = D.size() > 2 ? D[2] : 0;
       double p2 = D.size() > 3 ? D[3] : 0;
-      for (const auto i: irange(4ul, D.size())) {
+      for (const auto i: irange(4u, D.size())) {
         dc[i - 2] = D[i];
       }
       it = radTanModelMap_.insert(
@@ -103,7 +103,7 @@ namespace tagslam {
       const auto &K = ci.getKVec();
       const auto &D = ci.getDVec();
       double dc[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-      for (const auto i: irange(0ul, D.size())) {
+      for (const auto i: irange(0u, D.size())) {
         dc[i] = D[i];
       }
       it = equiModelMap_.insert(
