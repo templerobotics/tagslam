@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Thomas Schneider, Sept 2013
 # Codes from AprilTags C++ Library (http://people.csail.mit.edu/kaess/apriltags/)
 
